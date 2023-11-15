@@ -1,20 +1,16 @@
+from UI import UI
 import random
 import sys
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication
 
 
-class YellowCircles(QMainWindow):
+class YellowCircles(UI):
     def __init__(self):
         super().__init__()
-        self.setGeometry(300, 300, 300, 300)
 
         self.do_paint = False
-
-        self.generate_circle = QPushButton('Рисовать', self)
-        self.generate_circle.adjustSize()
-        self.generate_circle.move(5, 5)
         self.generate_circle.clicked.connect(self.paint)
 
     def paintEvent(self, event):
@@ -30,7 +26,8 @@ class YellowCircles(QMainWindow):
         self.repaint()
 
     def draw_circles(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        r, g, b = random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+        qp.setBrush(QColor(r, g, b))
         qp.setPen(QColor(255, 255, 255))
 
         radius = random.randint(10, 100)
